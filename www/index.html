@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Verdulería</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🥦</span>
+      <span class="brand-name">Verdulería</span>
+    </div>
+    <div class="topbar-acciones">
+      <button id="btn-reportes" class="btn-ghost">📊 Reportes</button>
+      <button id="btn-gestionar-productos" class="btn-ghost">🗂️ Productos</button>
+    </div>
+  </header>
+
+  <main class="grid-wrap">
+    <div id="grid-productos" class="grid-productos"></div>
+  </main>
+
+  <div class="cart-bar" id="cart-bar">
+    <div class="cart-info">
+      <span class="cart-count" id="cart-count">0 productos</span>
+      <span class="cart-total" id="cart-total">$0</span>
+    </div>
+    <button class="btn-primary" id="btn-ver-carrito">Ver detalle</button>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-cantidad">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="producto-seleccionado">
+        <span id="cantidad-emoji" class="emoji-grande"></span>
+        <div>
+          <div id="cantidad-nombre" class="prod-nombre-grande"></div>
+          <div id="cantidad-precio-unit" class="prod-precio-unit"></div>
+        </div>
+      </div>
+      <div class="display-cantidad">$<span id="display-valor">0</span></div>
+      <div class="subtotal-preview" id="equivalencia-cantidad">≈ 0 kg</div>
+      <div class="keypad">
+        <button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button>
+        <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button>
+        <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button>
+        <button data-key="000">000</button><button data-key="0">0</button>
+        <button data-key="back" class="key-back">⌫</button>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn-secondary" id="btn-cancelar-cantidad">Cancelar</button>
+        <button class="btn-primary" id="btn-confirmar-cantidad">Agregar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-carrito">
+    <div class="sheet sheet-tall">
+      <div class="sheet-handle"></div>
+      <h2>Detalle de la venta</h2>
+      <div id="lista-carrito-detalle" class="lista-carrito-detalle"></div>
+      <div class="total-final-row">
+        <span>Total</span>
+        <span id="total-final">$0</span>
+      </div>
+      <p class="hint-text">Ingresa este monto manualmente en el Point Smart para cobrar.</p>
+      <div class="sheet-actions">
+        <button class="btn-secondary" id="btn-seguir-comprando">Seguir agregando</button>
+        <button class="btn-primary" id="btn-finalizar-venta">Finalizar venta</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-gestion-productos">
+    <div class="sheet sheet-tall">
+      <div class="sheet-handle"></div>
+      <h2>Productos</h2>
+      <button class="btn-primary" id="btn-abrir-nuevo-producto" style="width:100%;margin-bottom:14px;">+ Agregar producto nuevo</button>
+      <input type="text" id="buscar-producto-gestion" placeholder="Buscar producto…" class="input-buscar" />
+      <div id="lista-gestion-productos" class="lista-gestion-productos"></div>
+      <div class="sheet-actions" style="margin-top:14px;">
+        <button class="btn-secondary" id="btn-cerrar-gestion">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-nuevo-producto">
+    <div class="sheet sheet-tall">
+      <div class="sheet-handle"></div>
+      <h2 id="titulo-form-producto">Nuevo producto</h2>
+      <label class="campo-label">Foto o ícono</label>
+      <div class="foto-picker">
+        <div class="foto-preview" id="foto-preview">🛒</div>
+        <div class="foto-opciones">
+          <input type="file" id="input-foto" accept="image/*" hidden />
+          <button type="button" class="btn-secondary" id="btn-tomar-foto">Subir foto</button>
+        </div>
+      </div>
+      <label class="campo-label">Buscar ícono sugerido (100+ disponibles)</label>
+      <input type="text" id="buscar-icono" placeholder="Ej: tomate, limón, huevo…" class="input-buscar" />
+      <div id="banco-iconos" class="banco-iconos"></div>
+      <label class="campo-label">Nombre</label>
+      <input type="text" id="nuevo-nombre" placeholder="Ej: Choclo" />
+      <label class="campo-label">Se vende por</label>
+      <div class="unidad-toggle">
+        <button class="unidad-btn active" data-unit="kg">Kilo</button>
+        <button class="unidad-btn" data-unit="unidad">Unidad</button>
+      </div>
+      <label class="campo-label">Precio</label>
+      <input type="number" id="nuevo-precio" placeholder="Ej: 1200" />
+      <div class="sheet-actions">
+        <button class="btn-secondary" id="btn-cancelar-nuevo">Cancelar</button>
+        <button class="btn-primary" id="btn-guardar-nuevo">Guardar producto</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-reportes">
+    <div class="sheet sheet-tall">
+      <div class="sheet-handle"></div>
+      <h2>Reportes de venta</h2>
+      <label class="campo-label">Desde</label>
+      <input type="date" id="reporte-desde" />
+      <label class="campo-label">Hasta</label>
+      <input type="date" id="reporte-hasta" />
+      <label class="campo-label">Producto</label>
+      <select id="reporte-producto">
+        <option value="todos">Todos los productos</option>
+      </select>
+      <div class="sheet-actions" style="margin-top:14px;">
+        <button class="btn-secondary" id="btn-cancelar-reportes">Cerrar</button>
+        <button class="btn-primary" id="btn-consultar-reportes">Consultar</button>
+      </div>
+      <div id="resultado-reportes" class="resultado-reportes" style="display:none;">
+        <div class="reporte-total-card">
+          <div class="reporte-total-label">Total del período</div>
+          <div class="reporte-total-monto" id="reporte-total-monto">$0</div>
+          <div class="reporte-total-cantidad" id="reporte-total-cantidad">0 ventas</div>
+        </div>
+        <h3 class="reporte-subtitulo">Por producto</h3>
+        <div id="reporte-por-producto" class="reporte-tabla"></div>
+        <h3 class="reporte-subtitulo">Ventas individuales</h3>
+        <div id="reporte-listado-ventas" class="reporte-tabla"></div>
+        <h3 class="reporte-subtitulo">Correos predeterminados</h3>
+        <div id="lista-correos" class="lista-correos"></div>
+        <div class="agregar-correo-row">
+          <input type="email" id="nuevo-correo" placeholder="agregar-correo@ejemplo.com" class="input-buscar" style="margin-bottom:0;" />
+          <button class="btn-secondary" id="btn-agregar-correo">+ Agregar</button>
+        </div>
+        <p class="hint-text">Toca un correo para copiarlo. Luego presiona "Enviar por correo", elige tu app de correo, y pega la dirección en el campo "Para".</p>
+
+        <div class="descarga-opciones">
+          <button class="btn-secondary" id="btn-descargar-excel">⬇️ Descargar Excel</button>
+          <button class="btn-secondary" id="btn-descargar-csv">⬇️ Descargar CSV</button>
+        </div>
+        <button class="btn-primary" id="btn-enviar-correo" style="width:100%;margin-top:10px;">📧 Enviar por correo (adjunta el Excel)</button>
+        <p class="hint-text">El archivo incluye fecha y hora exacta de cada venta. Se guarda en la carpeta Descargas del dispositivo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="overlay-confirmacion">
+    <div class="sheet confirmacion">
+      <div class="check-icon">✓</div>
+      <h2>Venta registrada</h2>
+      <p class="monto-confirmado" id="monto-confirmado">$0</p>
+      <button class="btn-primary" id="btn-nueva-venta">Nueva venta</button>
+    </div>
+  </div>
+
+  <script src="xlsx.full.min.js"></script>
+  <script src="capacitor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
