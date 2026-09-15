@@ -33,7 +33,8 @@ body {
   box-shadow: var(--sombra);
 }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 19px; }
-.brand-icon { font-size: 24px; }
+.brand-icon { font-size: 22px; letter-spacing: -6px; }
+.brand-accent { color: var(--verde); }
 .btn-ghost {
   border: 1.5px solid var(--verde);
   color: var(--verde-oscuro);

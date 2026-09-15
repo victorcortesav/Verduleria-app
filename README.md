@@ -1,8 +1,27 @@
-# Verdulería — App para tablet (Android)
+# Verdulería S&F — App para tablet (Android)
 
 App instalable en la tablet, sin necesidad de internet ni de un servidor
 aparte. Todos los datos (catálogo y ventas) se guardan directamente en el
 dispositivo. Los reportes se generan localmente (Excel y CSV).
+
+## Novedades de esta versión (v3)
+
+- **Venta más rápida:** "Finalizar venta" ahora cierra el proceso solo
+  (muestra el monto ~2 segundos y desaparece) — ya no hay que tocar
+  "Nueva venta".
+- **Nuevo nombre:** "Verdulería S&F", con ícono doble en el encabezado.
+- **Ícono de ensalada preparada** agregado al banco de íconos.
+- **Banco de íconos ampliado a 220** — ahora cubre prácticamente todas las
+  categorías de un supermercado (carnes, lácteos, panadería, bebidas,
+  limpieza, higiene personal, congelados, conservas, mascotas, bebé, etc.),
+  no solo frutas y verduras.
+- **Orden automático por más vendidos:** los productos en la grilla
+  principal se reordenan solos después de cada venta, mostrando primero los
+  que más se han vendido (por cantidad acumulada). Un producto nuevo sin
+  ventas queda al final hasta que empiece a venderse.
+- **Validación de nombres duplicados:** si intentas agregar un producto con
+  un nombre que ya existe en el catálogo (sin importar mayúsculas o tildes),
+  la app avisa y no deja guardar hasta que cambies el nombre.
 
 ## Cómo obtener el archivo .apk (vía GitHub, sin instalar nada pesado)
 
@@ -83,6 +102,18 @@ Si el dispositivo no soporta compartir archivos directamente (algunos
 navegadores/WebView antiguos), el botón descarga el Excel igual y avisa que
 hay que adjuntarlo manualmente desde la app de correo.
 
+**Corrección importante (versión 2):** la primera versión usaba una función
+web (`navigator.share`) para compartir el archivo, que no funcionaba de
+forma confiable dentro del contenedor de la app. Se reemplazó por los
+plugins oficiales de Capacitor (`Filesystem` y `Share`), que usan las
+herramientas nativas reales de Android — mucho más confiables. Aun así,
+**no pude probarlo en una tablet física desde aquí**, así que apenas
+actualices la app, verifica que:
+- "Descargar Excel/CSV" muestre un mensaje confirmando dónde se guardó
+- "Enviar por correo" abra el selector de apps con el archivo adjunto
+
+Si alguno de los dos falla, avísame para ajustarlo.
+
 ## Qué esperar de esta primera versión (siendo honesto)
 
 - **Los datos y el catálogo se guardan en el dispositivo** (no se pierden al
@@ -90,12 +121,12 @@ hay que adjuntarlo manualmente desde la app de correo.
   Si la tablet se rompe o se resetea, se pierde el historial — conviene, más
   adelante, agregar un respaldo (por ejemplo, exportar y guardar los Excel
   semanalmente en Google Drive).
-- **La descarga de reportes (Excel/CSV)** usa el método estándar de
-  descarga del navegador integrado en la app. En la mayoría de los Android
-  esto guarda el archivo en la carpeta "Descargas" del dispositivo — pero no
-  pude probarlo en una tablet física real desde aquí, así que es el primer
-  punto a verificar apenas la instales. Si no aparece el archivo, se puede
-  ajustar en una siguiente versión.
+- **La descarga de reportes (Excel/CSV)** ahora usa el plugin nativo
+  `Filesystem` de Capacitor, guardando el archivo directamente en el
+  almacenamiento del dispositivo (carpeta Documents de la app). Es más
+  confiable que el método anterior, pero de todas formas no pude probarlo en
+  una tablet física real desde aquí — es el primer punto a verificar apenas
+  actualices la app.
 - Este primer build es una versión **debug** (para pruebas). Funciona
   perfectamente para uso normal, pero si más adelante quieres distribuirla
   de forma más "oficial" (firmarla, subirla a una tienda privada, etc.), eso

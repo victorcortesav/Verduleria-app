@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Verduleria</string>
-    <string name="title_activity_main">Verduleria</string>
+    <string name="app_name">Verduleria S&amp;F</string>
+    <string name="title_activity_main">Verduleria S&amp;F</string>
     <string name="package_name">cl.familia.verduleria</string>
     <string name="custom_url_scheme">cl.familia.verduleria</string>
 </resources>
