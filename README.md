@@ -22,6 +22,16 @@ dispositivo. Los reportes se generan localmente (Excel y CSV).
 - **Validación de nombres duplicados:** si intentas agregar un producto con
   un nombre que ya existe en el catálogo (sin importar mayúsculas o tildes),
   la app avisa y no deja guardar hasta que cambies el nombre.
+- **Firma digital estable (importante):** antes, cada compilación en
+  GitHub generaba una firma distinta, lo que hacía que Android rechazara
+  las actualizaciones ("No se instaló la aplicación") y obligaba a
+  desinstalar la versión anterior cada vez. Se agregó un keystore de
+  prueba fijo al proyecto, así que **desde esta versión en adelante, las
+  actualizaciones futuras deberían instalarse encima de la anterior sin
+  problema** — no hace falta desinstalar cada vez.
+  **Excepción:** esta vez sí hay que desinstalar la versión anterior una
+  última vez, porque viene firmada distinto a como quedarán todas las que
+  siguen.
 
 ## Cómo obtener el archivo .apk (vía GitHub, sin instalar nada pesado)
 
