@@ -4,7 +4,30 @@ App instalable en la tablet, sin necesidad de internet ni de un servidor
 aparte. Todos los datos (catálogo y ventas) se guardan directamente en el
 dispositivo. Los reportes se generan localmente (Excel y CSV).
 
-## Novedades de esta versión (v3)
+## Novedades de esta versión (v5)
+
+- **Detalle de venta centrado:** el panel con "Seguir agregando" y
+  "Finalizar venta" ahora aparece centrado en la pantalla, igual que la
+  calculadora de monto.
+- **Compatible con celular y tablet:** se rediseñó cómo se posiciona la
+  barra "Cobrar" (ya no usa una posición fija estimada en píxeles, sino que
+  queda pegada al encabezado de forma natural) y se ajustaron los tamaños
+  de letra/botones del encabezado en pantallas angostas — la app se ve y
+  funciona igual de bien en un celular Android que en la tablet.
+
+## Novedades de la versión anterior (v4)
+
+- **Teclado de monto centrado:** el panel donde ingresas el monto en pesos
+  ahora aparece centrado en la pantalla, no pegado abajo.
+- **Tomar foto con la cámara:** al agregar un producto, ahora hay dos
+  botones separados — "📷 Tomar foto" (abre la cámara directo) y
+  "🖼️ Subir foto" (elige una foto ya guardada en el dispositivo).
+- **Detector de duplicados más claro:** si intentas agregar un producto
+  cuyo nombre ya existe, la app te lleva directo a esa coincidencia (con
+  su precio e ícono) para que la verifiques, en vez de solo bloquear a
+  ciegas.
+
+## Novedades de la versión anterior (v3)
 
 - **Venta más rápida:** "Finalizar venta" ahora cierra el proceso solo
   (muestra el monto ~2 segundos y desaparece) — ya no hay que tocar

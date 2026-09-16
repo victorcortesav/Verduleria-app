@@ -8,28 +8,30 @@
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-icon">🥬🍅</span>
-      <span class="brand-name">Verdulería <span class="brand-accent">S&amp;F</span></span>
+  <div class="app-header">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">🥬🍅</span>
+        <span class="brand-name">Verdulería <span class="brand-accent">S&amp;F</span></span>
+      </div>
+      <div class="topbar-acciones">
+        <button id="btn-reportes" class="btn-ghost">📊 Reportes</button>
+        <button id="btn-gestionar-productos" class="btn-ghost">🗂️ Productos</button>
+      </div>
+    </header>
+
+    <div class="cart-bar" id="cart-bar">
+      <div class="cart-info">
+        <span class="cart-count" id="cart-count">0 productos</span>
+        <span class="cart-total" id="cart-total">$0</span>
+      </div>
+      <button class="btn-en-barra" id="btn-ver-carrito" style="padding:16px 30px; font-size:18px;">💰 Cobrar</button>
     </div>
-    <div class="topbar-acciones">
-      <button id="btn-reportes" class="btn-ghost">📊 Reportes</button>
-      <button id="btn-gestionar-productos" class="btn-ghost">🗂️ Productos</button>
-    </div>
-  </header>
+  </div>
 
   <main class="grid-wrap">
     <div id="grid-productos" class="grid-productos"></div>
   </main>
-
-  <div class="cart-bar" id="cart-bar">
-    <div class="cart-info">
-      <span class="cart-count" id="cart-count">0 productos</span>
-      <span class="cart-total" id="cart-total">$0</span>
-    </div>
-    <button class="btn-primary" id="btn-ver-carrito">Ver detalle</button>
-  </div>
 
   <div class="sheet-overlay" id="overlay-cantidad">
     <div class="sheet">
@@ -96,7 +98,9 @@
         <div class="foto-preview" id="foto-preview">🛒</div>
         <div class="foto-opciones">
           <input type="file" id="input-foto" accept="image/*" hidden />
-          <button type="button" class="btn-secondary" id="btn-tomar-foto">Subir foto</button>
+          <input type="file" id="input-camara" accept="image/*" capture="environment" hidden />
+          <button type="button" class="btn-secondary" id="btn-tomar-foto">📷 Tomar foto</button>
+          <button type="button" class="btn-secondary" id="btn-subir-foto">🖼️ Subir foto</button>
         </div>
       </div>
       <label class="campo-label">Buscar ícono sugerido (100+ disponibles)</label>

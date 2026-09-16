@@ -360,13 +360,16 @@ function renderBancoIconos(filtro) {
   });
 }
 document.getElementById("buscar-icono").addEventListener("input", (e) => renderBancoIconos(e.target.value));
-document.getElementById("btn-tomar-foto").addEventListener("click", () => document.getElementById("input-foto").click());
-document.getElementById("input-foto").addEventListener("change", (e) => {
+function manejarFotoSeleccionada(e) {
   const file = e.target.files[0]; if (!file) return;
   const reader = new FileReader();
   reader.onload = () => { iconoSeleccionado = reader.result; document.getElementById("foto-preview").innerHTML = `<img src="${iconoSeleccionado}" />`; };
   reader.readAsDataURL(file);
-});
+}
+document.getElementById("btn-tomar-foto").addEventListener("click", () => document.getElementById("input-camara").click());
+document.getElementById("btn-subir-foto").addEventListener("click", () => document.getElementById("input-foto").click());
+document.getElementById("input-camara").addEventListener("change", manejarFotoSeleccionada);
+document.getElementById("input-foto").addEventListener("change", manejarFotoSeleccionada);
 document.querySelectorAll(".unidad-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".unidad-btn").forEach(b => b.classList.remove("active"));
@@ -383,11 +386,15 @@ document.getElementById("btn-guardar-nuevo").addEventListener("click", () => {
   if (!nombre || !precio) { alert("Ingresa nombre y precio del producto."); return; }
 
   const nombreNormalizado = normalizarTexto(nombre);
-  const duplicado = productos.some(p =>
+  const productoConflicto = productos.find(p =>
     p.id !== productoEditandoId && normalizarTexto(p.name) === nombreNormalizado
   );
-  if (duplicado) {
-    alert(`Ya existe un producto llamado "${nombre}" en el catálogo. Cambia el nombre para poder guardarlo (por ejemplo, agregando una marca o variedad).`);
+  if (productoConflicto) {
+    alert(`Ya existe "${productoConflicto.name}" en el catálogo (a $${Math.round(productoConflicto.price).toLocaleString("es-CL")} / ${productoConflicto.unit === "kg" ? "kilo" : "unidad"}). Te llevo a esa coincidencia para que la revises - si no es la que buscabas, cambia el nombre de este producto nuevo.`);
+    cerrarSheet("overlay-nuevo-producto");
+    document.getElementById("buscar-producto-gestion").value = productoConflicto.name;
+    renderGestionProductos(productoConflicto.name);
+    abrirSheet("overlay-gestion-productos");
     return;
   }
 
